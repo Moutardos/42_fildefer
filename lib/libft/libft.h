@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 01:35:07 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/03 13:38:54 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:58:08 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ char	*ft_strmap(char const *s, int (*f)(int));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_striter(char *s, void (*f)(char *));
 
-/* return an array of the words found in s, delimited by c */
+/* return an array of the words found in s, delimited by c, IS NULL ENDED*/
 char	**ft_split(char const *s, char c);
 
 /* return 1 if the char c is in s */
@@ -203,4 +203,5 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 int	ft_printf(const char *s, ...);
 char	*get_next_line(int fd);
+int count_lines(int fd);
 #endif

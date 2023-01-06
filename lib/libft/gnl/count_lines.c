@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   count_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 14:00:35 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/06 15:18:00 by lcozdenm         ###   ########.fr       */
+/*   Created: 2023/01/06 12:49:24 by lcozdenm          #+#    #+#             */
+/*   Updated: 2023/01/06 12:53:31 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "display.h"
-#include "grid.h"
-int main(int argc, char const **argv)
-{
-	t_grid *grid = create_grid("a");
-	if (!grid)
-		printf("FAIL");
-	else
-	{
-		print_grid(grid);
-	}
-	/*	t_display *dis= init_graph("test");
-	mlx_string_put(dis->mlx, dis->window, WIN_W/2, WIN_H/2, 0x336633,"coucou");
-	mlx_loop(dis->mlx);*/
-	return 0;
-}
+#include "get_next_line.h"
 
+int count_lines(int fd)
+{
+    int total = 0;
+    while (get_next_line(fd))
+        total++;
+    return (total);
+}

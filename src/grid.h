@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   grid.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 14:00:35 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/06 15:18:00 by lcozdenm         ###   ########.fr       */
+/*   Created: 2023/01/06 12:27:56 by lcozdenm          #+#    #+#             */
+/*   Updated: 2023/01/06 14:19:11 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "display.h"
-#include "grid.h"
-int main(int argc, char const **argv)
-{
-	t_grid *grid = create_grid("a");
-	if (!grid)
-		printf("FAIL");
-	else
-	{
-		print_grid(grid);
-	}
-	/*	t_display *dis= init_graph("test");
-	mlx_string_put(dis->mlx, dis->window, WIN_W/2, WIN_H/2, 0x336633,"coucou");
-	mlx_loop(dis->mlx);*/
-	return 0;
-}
+#ifndef GRID_H
+# define GRID_H
+# include <fcntl.h>
+# include "../lib/libft/libft.h"
 
+typedef struct s_grid
+{
+    int **grid;
+    int x_max;
+    int y_max;
+} t_grid;
+
+t_grid  *create_grid(char *fname);
+void    free_grid(t_grid *grid, int y);
+void	print_grid(t_grid * grid);
+int *strtoi(const char * str, int *len);
+#endif
