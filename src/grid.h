@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:27:56 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/06 14:19:11 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:22:22 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ typedef struct s_grid
 t_grid  *create_grid(char *fname);
 void    free_grid(t_grid *grid, int y);
 void	print_grid(t_grid * grid);
-int *strtoi(const char * str, int *len);
+int     *strtoi(const char * str, int *len);
 #endif
