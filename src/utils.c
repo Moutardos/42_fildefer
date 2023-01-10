@@ -6,22 +6,22 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:46:18 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/06 18:14:27 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/10 00:05:01 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "grid.h"
 
-int *strtoi(const char * str, int *x_max)
+int	*strtoi(const char *str, int *z_max)
 {
 	char			**to_atoi;
 	int				*res;
 	unsigned int	len;
 	unsigned int	i;
-	
+
 	to_atoi = ft_split(str, ' ');
 	if (!to_atoi)
-		return  (NULL);
+		return (NULL);
 	len = 0;
 	i = 0;
 	while (to_atoi[len])
@@ -34,24 +34,20 @@ int *strtoi(const char * str, int *x_max)
 	}
 	i = 0;
 	while (res && i < len)
-	{
-		free(to_atoi[i]);
-		i++;
-	}
-	free(to_atoi);
-	*x_max = len;
-	return (res);
+		free(to_atoi[i++]);
+	*z_max = len;
+	return (free(to_atoi), res);
 }
 
-void	print_grid(t_grid * grid)
+void	print_grid(t_grid *grid)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
 	printf("grid {\n\n");
-	while (j < grid->y_max)
+	while (j < grid->z_max)
 	{
 		while (i < grid->x_max)
 		{
