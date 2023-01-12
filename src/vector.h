@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:11:54 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/10 00:05:37 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/12 05:11:46 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 
 typedef struct s_vector
 {
-	int	x;
-	int	y;
-	int	z;
+	double	x;
+	double	y;
+	double	z;
 
 }   t_vector;
 
 
-t_vector    create_vector(int x, int y, int z);
+t_vector    create_vector(double x, double y, double z);
 t_vector	mul_vector(t_vector v1, t_vector v2);
 t_vector	add_vector(t_vector v1, t_vector v2);
 #endif

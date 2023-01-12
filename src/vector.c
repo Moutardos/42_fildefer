@@ -6,13 +6,13 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:11:26 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/09 22:21:24 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/12 05:18:15 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-t_vector	create_vector(int x, int y, int z)
+t_vector	create_vector(double x, double y, double z)
 {
 	t_vector	new;
 	
