@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:11:54 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/12 05:11:46 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:12:31 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 
 # define V_UP create_vector(0, -1, 0)
 # define V_DOWN create_vector(0, 1, 0)
-# define V_RIGHT create_vector(1, 0, 0)
-# define V_LEFT create_vector(-1, 0, 0)
+# define V_RIGHT create_vector(-1, 0, 0)
+# define V_LEFT create_vector(1, 0, 0)
 # define V_FORWARD create_vector(0, 0, 1)
 # define V_BACK create_vector(0, 0, -1)
 # define V_NORMAL create_vector(1, 1 ,1)
-# define V_NEG create_vector(1, 1 ,1)
+# define V_NEG create_vector(-1, -1 ,-1)
 # define V_EMPTY create_vector(0, 0, 0)
 
+# define LINE_LEN(XA, YA, XB, YB)  sqrt(pow((XB - XA), 2) + pow((YB - YA), 2))
 typedef struct s_vector
 {
 	double	x;
@@ -33,8 +34,17 @@ typedef struct s_vector
 
 }   t_vector;
 
+typedef struct s_coord
+{
+	double	x;
+	double	y;
+
+}   t_coord;
+
 
 t_vector    create_vector(double x, double y, double z);
+t_coord		create_coord(double x, double y);
 t_vector	mul_vector(t_vector v1, t_vector v2);
 t_vector	add_vector(t_vector v1, t_vector v2);
+t_coord		translate(t_coord repaire, t_vector v1, t_vector size);
 #endif

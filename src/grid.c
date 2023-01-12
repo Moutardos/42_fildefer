@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:41:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/10 00:04:50 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/12 06:06:56 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@ t_grid	*create_grid(char *fname)
 {
 	t_grid	*grid;
 	int		fd;
-
+	char	*line;
 	grid = malloc(sizeof(t_grid));
 	if (!grid)
 		return (NULL);
 	fd = open(fname, O_RDWR);
 	if (fd == -1)
-		return (NULL);
+		return (free(grid), NULL);
 	grid->z_max = count_lines(fd);
+
 	close(fd);
+	fd = open(fname, O_RDWR);
+	if (fd == -1)
+		return (free(grid), NULL);
 	grid->grid = malloc(sizeof(int *) * grid->z_max);
 	if (!grid->grid)
 		return (free(grid), NULL);
-	fd = open(fname, O_RDWR);
-	if (fd == -1)
-		return (NULL);
-	return (close(fd), fill_grid(fd, grid));
+	return (fill_grid(fd, grid));
 }
 
 t_grid	*fill_grid(int fd, t_grid *grid)
@@ -52,6 +53,7 @@ t_grid	*fill_grid(int fd, t_grid *grid)
 		y++;
 	}
 	line = get_next_line(fd);
+	close(fd);
 	return (grid);
 }
 

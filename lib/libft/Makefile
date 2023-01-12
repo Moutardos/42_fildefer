@@ -16,7 +16,7 @@ ft_lstmap.c ft_lstiter.c ft_lstlast.c ft_lstsize.c
 BONUS_OBJ = $(BONUS:.c=.o)
 RM = rm -f
 LIBFLAGS = -rc
-CFLAGS = -Wall -Wextra -Werror -o
+CFLAGS = -Wall -Wextra -Werror -fPIE -o 
 
 all: $(NAME)
 
