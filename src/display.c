@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:53:57 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/12 08:55:17 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:45:23 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,39 +63,47 @@ double	draw_grid(t_display *display, t_grid *grid)
 {
 	t_vector	count;
 	t_coord		start;
-	t_coord		current;
+	t_coord		cursor;
 	t_vector	decalage;
-	t_vector	direction;
 
 	start = create_coord(WIN_W/2, WIN_H/2);
-	start = translate(start, create_vector(-grid->x_max/2, 0, -grid->z_max/2), V_BASE);
+	decalage = create_vector(grid->x_max, grid->y_max, -grid->z_max);
+	start = translate(start, decalage, V_BASE);
 	count = V_EMPTY; 
-	current = start;
+	cursor = start;
 	while (count.z < grid->z_max - 1)
 	{
 		while(count.x < grid->x_max)
 		{
-			if (count.x > 0)
-			{
-				direction = V_EMPTY;
-				direction = add_vector(direction, add_vector(V_LEFT, V_FORWARD));
-				direction.y -= grid->grid[(int) count.z][(int) count.x];
-				direction.y += grid->grid[(int) count.z +1][(int) count.x - 1];
-				draw_direction(display, &current, direction);
-				current = translate(current, mul_vector(V_NEG, direction), V_BASE);
-			}
-			if (count.x < grid->x_max - 1)
-			{
-				direction = V_EMPTY;
-				direction = add_vector(V_RIGHT, V_FORWARD);
-				direction.y -= grid->grid[(int) count.z][(int) count.x];
-				direction.y += grid->grid[(int) count.z][(int) count.x + 1];
-				draw_direction(display, &current, direction);
-			}
+			draw_grid2(display, grid, count, &cursor);
 			count.x++;
 		}
-		count = add_vector(mul_vector(count, V_FORWARD), V_FORWARD);
-		current = translate(start, create_vector(count.z,grid->grid[(int)count.z][0],count.z), V_BASE);
+		count.x = 0;
+		count.z++;
+		decalage = create_vector(count.z,grid->grid[(int)count.z][0],count.z);
+		cursor = translate(start, decalage, V_BASE);
 	}
 }
 
+double	draw_grid2(t_display *dis, t_grid *grid, t_vector count, t_coord *c)
+{
+	t_vector	direction;
+
+	if (count.x > 0)
+	{
+		direction = V_EMPTY;
+		direction = add_vector(direction, add_vector(V_LEFT, V_FORWARD));
+		direction.y -= grid->grid[(int) count.z][(int) count.x];
+		direction.y += grid->grid[(int) count.z +1][(int) count.x];
+		draw_direction(dis, c, direction);
+		*c = translate(*c, mul_vector(V_NEG, direction), V_BASE);
+	}
+	if (count.x < grid->x_max - 1)
+	{
+		direction = V_EMPTY;
+		direction = add_vector(V_RIGHT, V_FORWARD);
+		direction.y -= grid->grid[(int) count.z][(int) count.x];
+		direction.y += grid->grid[(int) count.z][(int) count.x + 1];
+		draw_direction(dis, c, direction);
+	}
+}

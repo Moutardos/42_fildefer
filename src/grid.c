@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:41:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/12 06:06:56 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:50:42 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ t_grid	*fill_grid(int fd, t_grid *grid)
 {
 	int		y;
 	char	*line;
-
+	
 	y = 0;
+	grid->y_max = INT_MIN;
 	while (y < grid->z_max)
 	{
 		line = get_next_line(fd);
@@ -49,6 +50,8 @@ t_grid	*fill_grid(int fd, t_grid *grid)
 		grid->grid[y] = strtoi(line, &grid->x_max);
 		if (!grid->grid[y])
 			return (close(fd), free_grid(grid, y), NULL);
+		if (grid->y_max < get_max(grid->grid[y], grid->x_max))
+			grid->y_max = get_max(grid->grid[y], grid->x_max);
 		free(line);
 		y++;
 	}

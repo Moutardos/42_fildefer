@@ -11,7 +11,7 @@ CFLAGS = -Wall -Wextra
 LFLAGS = -L$(LIBFT) -lft -L$(LIBMLX) -lmlx -lXext -lX11 -lm
 LFLAGS_MAC = -L$(LIBFT) -lft -L$(LIBMLX_MAC) -lmlx  -framework OpenGL -framework AppKit -o $(NAME)
 
-_OBJS =  main.o display.o grid.o utils.o
+_OBJS =  main.o display.o grid.o utils.o vector.o 
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 
 all: lib $(NAME)
