@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:41 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/14 13:27:19 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:23:14 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@
 # include "grid.h"
 # include "vector.h"
 
-# define WIN_W 1280
-# define WIN_H 720
-# define V_BASE create_vector(7, 10, 10)
+# define WIN_W_M 1280
+# define WIN_H_M 720
+# define B_X 7
+# define B_Y 10
+# define B_Z 10
 typedef void	*t_mlx;
 typedef void	*t_window;
 
 typedef struct s_display
 {
 	t_mlx		*mlx;
-	int			win_h;
-	int			win_w;
+	t_coord		win;
+	t_vector	v_norm;
 	t_window	*window;
-	
 }	t_display;
 
 /* Initiate t_display with everything linked to the current display*/

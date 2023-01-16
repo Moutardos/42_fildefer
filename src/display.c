@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:53:57 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/14 13:45:23 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:55:45 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,24 @@ t_display	*init_graph(char *title, t_grid *grid)
 {
 	t_display	*new;
 
+
 	if (title == NULL)
 		return (NULL);
 	new = malloc(sizeof(t_display));
 	if (!new)
 		return (NULL);
+	new->v_norm = create_vector(B_X, B_Y, B_Z); //TODO adapt to windows if struct too big
 	new->mlx = mlx_init();
 	if (!new->mlx)
 		return (free(new), NULL);
-
-	new->window = mlx_new_window(new->mlx, WIN_W, WIN_H, title);
+	
+	new->win = translate(create_coord(0,0),create_vector(grid->x_max + grid->z_max - 1, grid->y_max, grid->z_max*2), new->v_norm);
+	if (new->win.y > WIN_H_M || new->win.x > WIN_W_M)
+	{
+		new->win.x = WIN_H_M;
+		new->win.y = WIN_W_M;
+	}
+	new->window = mlx_new_window(new->mlx, new->win.x, new->win.y, title);
 	if (!new->window)
 		return (free(new->mlx), free(new), NULL);
 	return (new);
@@ -36,7 +44,7 @@ double	draw_line(t_display *display, t_coord start, t_coord end)
 	double		l_size;
 	t_coord		delta;
 
-	l_size = LINE_LEN(start.x, start.y, end.x, end.y);
+	l_size = sqrt(pow((end.x - start.x), 2) + pow((end.y - start.y), 2));
 	delta.x = (end.x - start.x) / l_size;
 	delta.y = (end.y - start.y) / l_size;
 	while (l_size > 0)
@@ -53,7 +61,7 @@ double	draw_direction(t_display *display, t_coord *start, t_vector direction)
 {
 	t_coord	destination;
 
-	destination = translate(*start, direction, V_BASE);
+	destination = translate(*start, direction, display->v_norm);
 	draw_line(display, *start, destination);
 	*start = destination;
 }
@@ -66,10 +74,10 @@ double	draw_grid(t_display *display, t_grid *grid)
 	t_coord		cursor;
 	t_vector	decalage;
 
-	start = create_coord(WIN_W/2, WIN_H/2);
-	decalage = create_vector(grid->x_max, grid->y_max, -grid->z_max);
-	start = translate(start, decalage, V_BASE);
-	count = V_EMPTY; 
+	start = create_coord(display->win.x/2, display->win.y/2);
+	decalage = create_vector((grid->x_max + (grid->z_max - 1))/2, grid->y_max/2, -grid->z_max);
+	start = translate(start, decalage, display->v_norm);
+	count = create_vector(0, 0, 0); 
 	cursor = start;
 	while (count.z < grid->z_max - 1)
 	{
@@ -81,27 +89,31 @@ double	draw_grid(t_display *display, t_grid *grid)
 		count.x = 0;
 		count.z++;
 		decalage = create_vector(count.z,grid->grid[(int)count.z][0],count.z);
-		cursor = translate(start, decalage, V_BASE);
+		cursor = translate(start, decalage, display->v_norm);
 	}
 }
 
 double	draw_grid2(t_display *dis, t_grid *grid, t_vector count, t_coord *c)
 {
 	t_vector	direction;
+	t_vector	v_front_left;
+	t_vector	v_front_right;
+	t_vector	v_neg;
 
+	v_front_left = create_vector(1, 0, 1);
+	v_front_right = create_vector(-1, 0, 1);
+	v_neg = create_vector(-1, -1, -1);
 	if (count.x > 0)
 	{
-		direction = V_EMPTY;
-		direction = add_vector(direction, add_vector(V_LEFT, V_FORWARD));
+		direction = v_front_left;
 		direction.y -= grid->grid[(int) count.z][(int) count.x];
 		direction.y += grid->grid[(int) count.z +1][(int) count.x];
 		draw_direction(dis, c, direction);
-		*c = translate(*c, mul_vector(V_NEG, direction), V_BASE);
+		*c = translate(*c, mul_vector(v_neg, direction), dis->v_norm);
 	}
 	if (count.x < grid->x_max - 1)
 	{
-		direction = V_EMPTY;
-		direction = add_vector(V_RIGHT, V_FORWARD);
+		direction = v_front_right;
 		direction.y -= grid->grid[(int) count.z][(int) count.x];
 		direction.y += grid->grid[(int) count.z][(int) count.x + 1];
 		draw_direction(dis, c, direction);
