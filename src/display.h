@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:41 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/16 17:23:14 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:04:40 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ double	draw_line(t_display *display, t_coord start, t_coord end);
 double	draw_direction(t_display *display, t_coord *start, t_vector direction);
 double	draw_grid(t_display *display, t_grid *grid);
 double	draw_grid2(t_display *dis, t_grid *grid, t_vector count, t_coord *c);
+t_coord	size_of_grid(t_grid *grid, t_display *dis);
 #endif

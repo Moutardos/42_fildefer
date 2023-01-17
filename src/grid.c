@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:41:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/14 13:50:42 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/17 11:44:29 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_grid	*create_grid(char *fname)
 	if (fd == -1)
 		return (free(grid), NULL);
 	grid->z_max = count_lines(fd);
-
 	close(fd);
 	fd = open(fname, O_RDWR);
 	if (fd == -1)
