@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:41 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/17 17:42:16 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:10:13 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define WIN_W_M 1280
 # define WIN_H_M 720
 # define B_X 7
-# define B_Y 15
+# define B_Y 7
 # define B_Z 14
 typedef void	*t_mlx;
 typedef void	*t_window;

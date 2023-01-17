@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:53:57 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/17 17:41:34 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:03:00 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ double	draw_grid(t_display *display, t_grid *grid)
 	t_vector	decalage;
 
 	start = create_coord(display->win.x/2, display->win.y/2);
-	decalage = create_vector((-(grid->x_max - 1)/2 + (grid->z_max - 1)/2), -(grid->y_max + 1)/2, (-grid->z_max - (grid->x_max - 1))/2);
+	decalage = create_vector((-(grid->x_max - 1) + (grid->z_max - 1)),0, (-grid->z_max - (grid->x_max - 1))/2);
 	start = translate(start, decalage, display->v_norm);
 	count = create_vector(0, 0, 0); 
 	cursor = start;
