@@ -6,13 +6,13 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:46:18 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/17 12:57:33 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:24:04 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "grid.h"
 
-int	*strtoi(const char *str, int *z_max)
+int	*strtoi(const char *str, int *x_max)
 {
 	char			**to_atoi;
 	int				*res;
@@ -35,7 +35,7 @@ int	*strtoi(const char *str, int *z_max)
 	i = 0;
 	while (res && i < len)
 		free(to_atoi[i++]);
-	*z_max = len;
+	*x_max = len;
 	return (free(to_atoi), res);
 }
 

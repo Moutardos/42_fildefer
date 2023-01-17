@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:11:54 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/16 16:47:52 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:33:19 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 # define LINE_LEN(XA, YA, XB, YB)  sqrt(pow((XB - XA), 2) + pow((YB - YA), 2))
 typedef struct s_vector
 {
-	double	x;
-	double	y;
-	double	z;
+	long double	x;
+	long double	y;
+	long double	z;
 
 }   t_vector;
 
 typedef struct s_coord
 {
-	double	x;
-	double	y;
+	long double	x;
+	long double	y;
 
 }   t_coord;
 
