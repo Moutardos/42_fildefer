@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:42:49 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/20 13:55:20 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:49:26 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ double	draw_line(t_display *dis, t_coord start, t_coord end)
 		l_size--;
 	}
 	return (l_size);
+}
+
+int	height_color(t_grid *grid, int y)
+{
+	double	p_max;
+
+	p_max = ((double) grid->y_max)/((double) y);
+	if (p_max <= 0.50)
+		return (0xffff00 + (1-p_max)*255);
+	else
+		return(0xffff00 - (p_max)*255);
 }
 
 t_coord	size_of_grid(t_grid *grid, t_display *dis)

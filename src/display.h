@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:41 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/20 14:02:53 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:49:34 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ double	draw_grid(t_display *display, t_grid *grid);
 double	draw_grid2(t_display *dis, t_grid *grid, t_vector count, t_coord *c);
 t_coord	size_of_grid(t_grid *grid, t_display *dis);
 void	pixel_put_img(t_img_data *img, int x, int y, int color);
-
+int	height_color(t_grid *grid, int y);
 #endif
