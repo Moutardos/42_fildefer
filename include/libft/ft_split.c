@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcozdenm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 10:44:46 by lcozdenm          #+#    #+#             */
-/*   Updated: 2022/11/20 12:27:06 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:33:57 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*ft_ext_word(char const **p_s, char c)
 	len = 0;
 	while ((*p_s)[len] && (*p_s)[len] != c)
 		len++;
-	if (len + 1 > SIZE_MAX)
+	if (len == SIZE_MAX)
 		return (NULL);
 	word = malloc(len + 1);
 	if (word == NULL)
@@ -82,7 +82,7 @@ char	**ft_split(char const *s, char c)
 	wc = ft_wc(s, c);
 	i = 0;
 	size = 0;
-	if (sizeof(char *) * (size + 1) > SIZE_MAX)
+	if (sizeof(char *) * (size + 1) == SIZE_MAX)
 		return (NULL);
 	res = malloc(sizeof(char *) * (wc + 1));
 	if (res == NULL)
