@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   matrice.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:11:26 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/17 13:00:30 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/25 01:53:16 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "matrice.h"
 
-t_vector	create_vector(double x, double y, double z)
+t_coord	create_coord(float x, float y, float z)
 {
-	t_vector	new;
+	t_coord	new;
 	
 	new.x = x;
 	new.y = y;
@@ -23,30 +23,12 @@ t_vector	create_vector(double x, double y, double z)
 	return new;
 }
 
-t_vector	mul_vector(t_vector v1, t_vector v2)
+t_coord	mul_matcoord(t_coord point, t_matrice mat)
 {
-	t_vector	new;
-	
-	new.x = v1.x * v2.x;
-	new.y = v1.y * v2.y;
-	new.z = v1.z * v2.z;
-	return (new);
-}
+	t_coord	result;
 
-
-t_coord	create_coord(double x, double y)
-{
-	t_coord	new;
-
-	new.x = x;
-	new.y = y;
-	return new;
-}
-t_coord	translate(t_coord repaire, t_vector v1, t_vector size)
-{
-	t_coord new;
-
-	new.x	= repaire.x + (v1.z * size.z);
-	new.y	= repaire.y - (v1.x * size.x) - (v1.y * size.y);
-	return (new);
+	result.x = mat[0][0] * point.x + mat[0][1] * point.y + mat[0][2] * point.z;
+	result.y = mat[1][0] * point.x + mat[1][1] * point.y + mat[1][2] * point.z;
+	result.z = mat[2][0] * point.x + mat[2][1] * point.y + mat[2][2] * point.z;
+	return (result);
 }

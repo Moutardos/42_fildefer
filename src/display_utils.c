@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:42:49 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/20 14:49:26 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/25 00:20:07 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	pixel_put_img(t_img_data *img, int x, int y, int color)
 	*((int *)dst) = color;
 }
 
-double	draw_line(t_display *dis, t_coord start, t_coord end)
+double	draw_line(t_display *dis, t_coord start, t_coord end, int color)
 {
 	double		l_size;
 	t_coord		delta;
@@ -61,7 +61,7 @@ double	draw_line(t_display *dis, t_coord start, t_coord end)
 	while (l_size > 0)
 	{
 		if ((start.x >= 0 && start.y >= 0) && (start.x < dis->win.x && start.y < dis->win.y))
-			pixel_put_img(dis->img, start.x, start.y, 0x336633);
+			pixel_put_img(dis->img, start.x, start.y, 0xffffff);
 		start.x += delta.x;
 		start.y += delta.y;
 		l_size--;
@@ -69,11 +69,11 @@ double	draw_line(t_display *dis, t_coord start, t_coord end)
 	return (l_size);
 }
 
-int	height_color(t_grid *grid, int y)
+int	height_color(int max, int y)
 {
 	double	p_max;
 
-	p_max = ((double) grid->y_max)/((double) y);
+	p_max = ((double) max)/((double) y);
 	if (p_max <= 0.50)
 		return (0xffff00 + (1-p_max)*255);
 	else

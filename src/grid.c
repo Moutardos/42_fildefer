@@ -6,18 +6,19 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:41:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/17 15:10:57 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:21:37 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "grid.h"
 
-t_grid	*create_grid(char *fname)
+t_gridinfo	*create_grid(char *fname)
 {
-	t_grid	*grid;
-	int		fd;
-	char	*line;
-	grid = malloc(sizeof(t_grid));
+	t_gridinfo	*grid;
+	int			fd;
+	char		*line;
+
+	grid = malloc(sizeof(t_gridinfo));
 	if (!grid)
 		return (NULL);
 	fd = open(fname, O_RDWR);
@@ -28,35 +29,67 @@ t_grid	*create_grid(char *fname)
 	fd = open(fname, O_RDWR);
 	if (fd == -1)
 		return (free(grid), NULL);
-	grid->grid = malloc(sizeof(int *) * grid->z_max);
+	grid->grid = malloc(sizeof(t_coord *) * grid->z_max);
 	if (!grid->grid)
 		return (free(grid), NULL);
+	grid->x_max = -1;
 	return (fill_grid(fd, grid));
 }
 
-t_grid	*fill_grid(int fd, t_grid *grid)
+t_grid	*fill_grid(int fd, t_gridinfo *grid)
 {
 	int		y;
 	char	*line;
-	
+	char	**heights;
+	int		i;
+	t_coord	*c_line;
+
 	y = 0;
-	grid->y_max = INT_MIN;
 	while (y < grid->z_max)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			return (close(fd), free_grid(grid, y), NULL);
-		grid->grid[y] = strtoi(line, &grid->x_max);
-		if (!grid->grid[y])
-			return (close(fd), free_grid(grid, y), NULL);
-		if (grid->y_max < get_max(grid->grid[y], grid->x_max))
-			grid->y_max = get_max(grid->grid[y], grid->x_max);
+		heights = ft_split(line, ' ');
 		free(line);
+		if (!heights)
+			return (close(fd), free_grid(grid, y), NULL);
+		c_line = fill_coord(heights, y, &grid->x_max);
+		free(heights);
+		if (!c_line)
+			return (close(fd), free_grid(grid, y), NULL);
+		grid->grid[y] = c_line;
 		y++;
 	}
 	line = get_next_line(fd);
 	close(fd);
 	return (grid);
+}
+
+t_coord	*fill_coord(char **line, int y, int *x_max)
+{
+	int		x;
+	t_coord	*points;
+
+	x = 0;
+	if (*x_max == -1)
+	{
+		while (*line[x])
+			x++;
+		*x_max = x;
+		x = 0;
+	}
+	points = malloc(sizeof(t_coord) * x);
+	if (!points)
+		return (NULL);
+	while(*line[x])
+	{
+		points[x].x = x;
+		points[x].z = y;
+		points[x].y = ft_atoi(line[y][x]);
+		x++;
+	}
+	return (points);
 }
 
 void	free_grid(t_grid *grid, int y)

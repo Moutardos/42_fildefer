@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:53:57 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/20 14:19:37 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:09:35 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,12 @@ double	draw_direction(t_display *display, t_coord *start, t_vector direction)
 }
 
 
-double	draw_grid(t_display *display, t_grid *grid)
+double	draw_grid(t_display *display, t_grid *grid, t_coord start)
 {
-	t_vector	count;
-	t_coord		start;
-	t_coord		cursor;
-	t_vector	decalage;
+	t_coord	cursor;
+	t_coord	decalage;
 
-	start = create_coord(display->win.x/2, display->win.y);
-	decalage = create_vector(((grid->z_max - 1)),0, (-grid->z_max - (grid->x_max - 1))/2);
 	start = translate(start, decalage, display->v_norm);
-	count = create_vector(0, 0, 0); 
 	cursor = start;
 	while (count.z < grid->z_max - 1)
 	{
@@ -56,9 +51,6 @@ double	draw_grid2(t_display *dis, t_grid *grid, t_vector count, t_coord *c)
 	t_vector	v_front_right;
 	t_vector	v_neg;
 
-	v_front_left = create_vector(-1, 0, 1);
-	v_front_right = create_vector(1, 0, 1);
-	v_neg = create_vector(-1, -1, -1);
 	if (count.x > 0)
 	{
 		direction = v_front_left;

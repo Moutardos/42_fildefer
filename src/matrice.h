@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   matrice.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:11:54 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/17 14:33:19 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/25 01:37:25 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,20 @@
 # define VECTOR_H
 
 # include <math.h>
-
+# define _USE_MATH_DEFINES
 # define LINE_LEN(XA, YA, XB, YB)  sqrt(pow((XB - XA), 2) + pow((YB - YA), 2))
-typedef struct s_vector
-{
-	long double	x;
-	long double	y;
-	long double	z;
 
-}   t_vector;
+typedef float	t_matrice[4][4];
 
 typedef struct s_coord
 {
-	long double	x;
-	long double	y;
-
+	float	x;
+	float	y;
+	float	z;
 }   t_coord;
 
+t_coord	create_coord(double x, double y, double z);
+t_coord	mul_matcoord(t_coord point, t_matrice mat);
 
-t_vector    create_vector(double x, double y, double z);
-t_coord		create_coord(double x, double y);
-t_vector	mul_vector(t_vector v1, t_vector v2);
-t_vector	add_vector(t_vector v1, t_vector v2);
-t_coord		translate(t_coord repaire, t_vector v1, t_vector size);
+
 #endif
