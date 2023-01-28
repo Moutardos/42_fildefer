@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:27:56 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/25 17:34:37 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/28 21:42:09 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 # include "matrice.h"
+# define MAT_PROJ {{1, 0, 0},{0, 1, 0},{0, 0, 0}}
 
 typedef t_coord** t_grid;
 typedef struct s_gridinfo
@@ -31,11 +32,11 @@ t_coord	*fill_coord(char **line, int y, t_gridinfo *grid);
 void	free_grid(t_gridinfo *grid, int y);
 
 /** TRANSFORMATION **/
-void	scale_g(t_gridinfo *grid, float scale);
+void	scale_g(t_gridinfo *grid, t_coord scale);
 void	rotate_g(t_gridinfo *grid, float rota, float rotb);
 void	translate_g(t_gridinfo *grid, t_coord coord);
-void	scale_height_g(t_gridinfo *grid, float scale);
-void	projection_g(t_gridinfo *grid, t_matrice);
+void	project_g(t_gridinfo *grid, t_matrice mat);
+void	rotate_3d(t_gridinfo *grid, float x, float y, float z);
 /** UTILITY **/
 int		*strtoi(const char *str, int *len);
 void	print_grid(t_gridinfo *grid);

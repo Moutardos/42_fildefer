@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:41:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/25 17:05:31 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/28 21:53:26 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,26 @@ t_gridinfo	*fill_grid(int fd, t_gridinfo *grid)
 t_coord	*fill_coord(char **line, int y, t_gridinfo *grid)
 {
 	int		x;
+	int		len;
 	t_coord	*points;
 
-	x = 0;
+	len = 0;
 	if (grid->x_max == -1)
 	{
-		while (line[x])
-			x++;
-		grid->x_max = x;
-		x = 0;
+		while (line[len])
+			len++;
+		grid->x_max = len;
 	}
+	len = grid->x_max;
+	x = 0;
 	points = malloc(sizeof(t_coord) * grid->x_max);
 	if (!points)
 		return (NULL);
 	while(line[x])
 	{
 		points[x].z = (float) ft_atoi(line[x]); ;
-		points[x].x = ((float) x)/(grid->x_max - 1);
-		points[x].y = ((float) y)/(grid->y_max - 1);
+		points[x].x = ((float) x)/(len - 1);
+		points[x].y = 1 - ((float) y)/(grid->y_max - 1);
 		x++;
 	}
 	return (points);
