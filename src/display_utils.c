@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:42:49 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/28 21:56:01 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/29 11:54:09 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ double	draw_line(t_display *dis, t_coord start, t_coord end, int color)
 	while (l_size > 0)
 	{
 		if ((start.x >= 0 && start.y >= 0) && (start.x < WIN_W && start.y < WIN_H))
-			pixel_put_img(dis->img, start.x, WIN_H - start.y, 123);
+			pixel_put_img(dis->img, start.x, start.y, 123);
 		start.x += delta.x;
 		start.y += delta.y;
 		l_size--;

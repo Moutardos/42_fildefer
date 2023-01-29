@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:41 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/28 21:00:53 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/29 11:39:18 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "display.h"
 # include "matrice.h"
 # define WIN_W 1280
-# define WIN_H 720
+# define WIN_H 1280
 # define ANGLE M_PI/2
 # define ANG_ISO_A 0.615472907
 # define ANG_ISO_B 0.785398

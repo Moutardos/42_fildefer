@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:11:26 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/28 21:29:05 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/29 11:34:01 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_coord	mul_matcoord(t_coord point, t_matrice mat)
 {
 	t_coord	result;
 
-	result.x = mat[0][0] * point.x + mat[0][1] * point.y + mat[0][2] * point.z;
-	result.y = mat[1][0] * point.x + mat[1][1] * point.y + mat[1][2] * point.z;
-	result.z = mat[2][0] * point.x + mat[2][1] * point.y + mat[2][2] * point.z;
+	result.x = point.x * mat[0][0] + point.y * mat[0][1] + point.z * mat[0][2];
+	result.y = point.x * mat[1][0] + point.y * mat[1][1] + point.z * mat[1][2];
+	result.z = point.x * mat[2][0] + point.y * mat[2][1] + point.z * mat[2][2];
 	return (result);
 }
 
