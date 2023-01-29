@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:07:21 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/29 11:31:58 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/29 15:37:20 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	rotate_3d(t_gridinfo *grid, float x, float y, float z)
 	const t_matrice mat_z = {{cos(z), sin(z), 0},{-sin(z), cos(z), 0},{0, 0, 1}};
 
 	j = 0;
+	translate_g(grid, create_coord(-0.5, -0.5, 0));
 	while (j < grid->y_max)
 	{
 		i = 0;
@@ -101,4 +102,5 @@ void	rotate_3d(t_gridinfo *grid, float x, float y, float z)
 		}
 		j++;
 	}
+	translate_g(grid, create_coord(0.5, 0.5, 0));
 }

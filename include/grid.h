@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:27:56 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/28 21:42:09 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:30:15 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ typedef struct s_gridinfo
 	t_grid	grid;
 	int	x_max;
 	int	y_max;
+	int	z_max;
 }	t_gridinfo;
 
 /** CREATION GRID **/
 t_gridinfo	*create_grid(char *fname);
 t_gridinfo	*fill_grid(int fd, t_gridinfo *grid);
 t_coord	*fill_coord(char **line, int y, t_gridinfo *grid);
+t_gridinfo	*gridcpy(t_gridinfo *grid);
 void	free_grid(t_gridinfo *grid, int y);
 
 /** TRANSFORMATION **/

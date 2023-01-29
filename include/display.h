@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:41 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/29 11:39:18 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:07:15 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "display.h"
 # include "matrice.h"
 # define WIN_W 1280
-# define WIN_H 1280
+# define WIN_H 720
 # define ANGLE M_PI/2
 # define ANG_ISO_A 0.615472907
 # define ANG_ISO_B 0.785398
@@ -53,5 +53,6 @@ double	draw_grid(t_display *display, t_gridinfo *grid);
 // t_coord	size_of_grid(t_grid *grid, t_display *dis);
 void	pixel_put_img(t_img_data *img, int x, int y, int color);
 // int		height_color(t_grid *grid, int y);
-
+t_img_data	*new_image(t_display *dis);
+void	free_display(t_display *dis);
 #endif

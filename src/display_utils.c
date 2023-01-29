@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:42:49 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/29 11:54:09 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:20:14 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 t_display	*init_graph(char *title, t_gridinfo *grid)
 {
 	t_display	*n;
-	t_img_data	*img;
 
 	if (title == NULL)
 		return (NULL);
@@ -31,14 +30,38 @@ t_display	*init_graph(char *title, t_gridinfo *grid)
 		return (free(n->mlx), free(n), NULL);
 	n->img = malloc(sizeof(t_img_data));
 	if (!n->img)
-		return (free(n->img),free(n->mlx), free(n->window), free(n), NULL);
-	n->img->img = mlx_new_image(n->mlx, WIN_W, WIN_H);
-	if (!n->img->img)
-		return (free(n->img),free(n->mlx), free(n->window), free(n), NULL);
-	img = n->img;
-	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->len, &img->endian);
+		return (free(n->mlx), free(n->window), free(n), NULL);
+	n->img->img = NULL;
 	return (n);
 }
+
+t_img_data	*new_image(t_display *dis)
+{
+	t_img_data	*img;
+
+	img = dis->img;
+	if (img->img)
+		mlx_destroy_image(dis->mlx, dis->img->img);
+	img->img = mlx_new_image(dis->mlx, WIN_W, WIN_H);
+	if (!img->img)
+		return (free(img), NULL);
+	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->len, &img->endian);
+	if (!img->addr)
+		return (free(img->img), free(img), NULL);
+	dis->img = img;
+	return (img);
+}
+
+void 	free_display(t_display *dis)
+{
+	mlx_destroy_image(dis->mlx, dis->img->img);
+	mlx_destroy_window(dis->mlx, dis->window);
+	free(dis->mlx);
+	if (dis->img)
+		free(dis->img);
+	free(dis);
+}
+
 void	pixel_put_img(t_img_data *img, int x, int y, int color)
 {
 	void	*dst;
@@ -57,7 +80,7 @@ double	draw_line(t_display *dis, t_coord start, t_coord end, int color)
 	while (l_size > 0)
 	{
 		if ((start.x >= 0 && start.y >= 0) && (start.x < WIN_W && start.y < WIN_H))
-			pixel_put_img(dis->img, start.x, start.y, 123);
+			pixel_put_img(dis->img, start.x, start.y, color);
 		start.x += delta.x;
 		start.y += delta.y;
 		l_size--;
@@ -65,13 +88,3 @@ double	draw_line(t_display *dis, t_coord start, t_coord end, int color)
 	return (l_size);
 }
 
-int	height_color(int max, int y)
-{
-	double	p_max;
-
-	p_max = ((double) max)/((double) y);
-	if (p_max <= 0.50)
-		return (0xffff00 + (1-p_max)*255);
-	else
-		return(0xffff00 - (p_max)*255);
-}
