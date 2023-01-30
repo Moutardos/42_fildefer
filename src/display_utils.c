@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:42:49 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/29 16:20:14 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/30 09:47:14 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_display	*init_graph(char *title, t_gridinfo *grid)
 	if (!n->img)
 		return (free(n->mlx), free(n->window), free(n), NULL);
 	n->img->img = NULL;
+	n->c1 = 0xffffff;
+	n->c2 = 0xff0000;
 	return (n);
 }
 
@@ -69,20 +71,27 @@ void	pixel_put_img(t_img_data *img, int x, int y, int color)
 	*((int *)dst) = color;
 }
 
-double	draw_line(t_display *dis, t_coord start, t_coord end, int color)
+double	draw_line(t_display *dis, t_coord start, t_coord end)
 {
 	double		l_size;
 	t_coord		delta;
+	float		c_delta;
+	int			c1;
+	int			c2;
 
+	c1 = h_color(start.y/WIN_H, dis->c1, dis->c2);
+	c2 = h_color(end.y/WIN_H, dis->c1, dis->c2);
 	l_size = sqrt(pow((end.x - start.x), 2) + pow((end.y - start.y), 2));
 	delta.x = (end.x - start.x) / l_size;
 	delta.y = (end.y - start.y) / l_size;
+	c_delta = ((float) c2 - (float) c1) / l_size;
 	while (l_size > 0)
 	{
 		if ((start.x >= 0 && start.y >= 0) && (start.x < WIN_W && start.y < WIN_H))
-			pixel_put_img(dis->img, start.x, start.y, color);
+			pixel_put_img(dis->img, start.x, start.y, c1);
 		start.x += delta.x;
 		start.y += delta.y;
+		c1 += c_delta;
 		l_size--;
 	}
 	return (l_size);

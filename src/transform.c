@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:07:21 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/29 15:37:20 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/30 15:56:38 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ void	translate_g(t_gridinfo *grid, t_coord coord)
 
 void	project_g(t_gridinfo *grid, t_matrice mat)
 {
-	int j;
-	int i;
+	int 	j;
+	int 	i;
+	float	z;
+	
 	t_coord *point;
 
 	j = 0;
@@ -71,7 +73,9 @@ void	project_g(t_gridinfo *grid, t_matrice mat)
 		while (i < grid->x_max)
 	   {
 			point = &grid->grid[j][i];
+			z = point->z;
 			*point = mul_matcoord(*point, mat);
+			point->z = z;
 			i++;
 		}
 		j++;
@@ -83,9 +87,9 @@ void	rotate_3d(t_gridinfo *grid, float x, float y, float z)
 	int j;
 	int i;
 	t_coord *point;
-	const t_matrice mat_x = {{1, 0, 0},{0, cos(x), sin(x)},{0, -sin(x), cos(x)}};
-	const t_matrice mat_y = {{cos(y), 0, -sin(y)},{0, 1, 0},{sin(y), 0, cos(y)}};
-	const t_matrice mat_z = {{cos(z), sin(z), 0},{-sin(z), cos(z), 0},{0, 0, 1}};
+	const t_matrice mat_x = {{1, 0, 0},{0, cos(x), -sin(x)},{0, sin(x), cos(x)}};
+	const t_matrice mat_y = {{cos(y), 0, sin(y)},{0, 1, 0},{-sin(y), 0, cos(y)}};
+	const t_matrice mat_z = {{cos(z), -sin(z), 0},{sin(z), cos(z), 0},{0, 0, 1}};
 
 	j = 0;
 	translate_g(grid, create_coord(-0.5, -0.5, 0));
@@ -95,8 +99,8 @@ void	rotate_3d(t_gridinfo *grid, float x, float y, float z)
 		while (i < grid->x_max)
 	   {
 			point = &grid->grid[j][i];
-			*point = mul_matcoord(*point, mat_x);
 			*point = mul_matcoord(*point, mat_y);
+			*point = mul_matcoord(*point, mat_x);
 			*point = mul_matcoord(*point, mat_z);
 			i++;
 		}

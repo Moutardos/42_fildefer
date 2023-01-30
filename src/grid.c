@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:41:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/29 16:30:59 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/30 10:23:27 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ t_coord	*fill_coord(char **line, int y, t_gridinfo *grid)
 	{
 		if (ft_atoi(line[x]) > grid->z_max)
 			grid->z_max = ft_atoi(line[x]);
-		points[len - x - 1].z = (float) -ft_atoi(line[x]); ;
-		points[len - x - 1].x = ((float) x)/(len - 1);
-		points[len - x - 1].y = ((float) y)/(grid->y_max - 1);
+		points[x].z = (float) -ft_atoi(line[x]); ;
+		points[x].x = ((float) x)/(len - 1);
+		points[x].y = ((float) y)/(grid->y_max - 1);
 		x++;
 	}
 	return (points);
@@ -144,5 +144,7 @@ void	free_grid(t_gridinfo *grid, int y)
 		free(grid->grid[i]);
 		i++;
 	}
+	free(grid->grid);
 	free(grid);
+	grid = NULL;
 }
