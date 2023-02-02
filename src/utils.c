@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:46:18 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/25 16:34:44 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/02 04:15:41 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ void	print_grid(t_gridinfo *grid)
 
 	i = 0;
 	j = 0;
-	printf("grid {\n\n");
+	ft_printf("grid {\n\n");
 	while (j < grid->y_max)
 	{
 		while (i < grid->x_max)
 		{
-			printf("(%.3f,%.3f,%.3f)  ", grid->grid[j][i].x, grid->grid[j][i].y, grid->grid[j][i].z);
+			ft_printf("(%.3f,%.3f,%.3f)  ", grid->grid[j][i].x, grid->grid[j][i].y, grid->grid[j][i].z);
 			i++;
 		}
 		j++;
 		i = 0;
-		printf("\n");
+		ft_printf("\n");
 	}
-	printf("\n}\n");
+	ft_printf("\n}\n");
 }
 
 int	get_max(int *arr, int len)
