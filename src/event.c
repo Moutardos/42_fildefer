@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:47:05 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/02 05:06:02 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:15:34 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int render_img(t_env *env)
 		translate_g(grid, create_coord(user->move.x, user->move.y, user->move.z));
 		project_g(grid, proj);
 		draw_grid(dis, grid);
+		free_grid(grid, grid->y_max);		
 		mlx_put_image_to_window(dis->mlx, dis->window, dis->img->img, 0, 0);
-		free_grid(grid, grid->y_max);
 		return (0);
 }
 
@@ -77,50 +77,19 @@ t_env	*init_env(char *name)
 	return (env);
 }
 
-int key_handler(int key, void *param)
+void	quit_fdf(t_env *env)
 {
-	t_modif	*user;
-
-	user = (t_modif *) param;
-	printf("%d\n", key);
-	if (key == 97)
-		user->angle.y += 0.15;
-	else if (key == 100)
-		user->angle.y -= 0.15;
-	else if (key == 113)
-		user->angle.z -= 0.15;
-	else if (key == 101)
-		user->angle.z += 0.15;
-	else if (key == 50)
-	{
-		user->zoom.x *= 1.25;
-		user->zoom.y *= 1.25;
-	}
-	else if (key == 49)
-	{
-		user->zoom.x /= 1.25;
-		user->zoom.y /= 1.25;
-	}
-	else
-		return (key_handler2(key, user));
+	free_display(env->dis);
+	free_grid(env->grid, env->grid->y_max);
+	free(env->user);
+	free(env);
+	exit(0);
 }
 
-int key_handler2(int key, t_modif *user)
+int	fdf_loop(t_env *env)
 {
-	if (key == 65363)
-		user->move.x -= user->zoom.y/10;
-	else if (key == 65364)
-		user->move.y -= user->zoom.y/10;
-	else if (key == 65361)
-		user->move.x += user->zoom.y/10;
-	else if (key == 65362)
-		user->move.y += user->zoom.x/10;
-	else if (key == 45)
-	{
-		if (user->zoom.z < 10)
-			user->zoom.z *= 1.25;
-	}
-	else if (key == 61)
-		user->zoom.z /= 1.25;
-	return (0);
+	mlx_key_hook(env->dis->window, key_handler, env);
+	mlx_loop_hook(env->dis->mlx, render_img, env);
+	mlx_loop(env->dis->mlx);
+	return (0); 
 }

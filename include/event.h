@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:46:54 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/30 14:40:36 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/03 19:12:35 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ typedef struct	s_env
 
 
 
-int     render_img(t_env *env);
-int     key_handler2(int key, t_modif *user);
+int     key_handler2(int key, t_env *env);
 int     key_handler(int key, void *user);
 t_modif	*init_user(void);
 t_env	*init_env(char *name);
+int     render_img(t_env *env);
+int		fdf_loop(t_env *env);
+void	quit_fdf(t_env *env);

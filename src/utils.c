@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:46:18 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/02 04:15:41 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:05:59 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,3 +77,15 @@ int	get_max(int *arr, int len)
 	return (max);
 }
 
+void	free_split(char **s)
+{
+	char	**curr;
+
+	curr = s;
+	while (*curr)
+	{
+		free(*curr);
+		curr++;
+	}
+	free(s);
+}

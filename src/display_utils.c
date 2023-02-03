@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:42:49 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/30 09:47:14 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:15:12 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,19 @@ t_img_data	*new_image(t_display *dis)
 		return (free(img), NULL);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->len, &img->endian);
 	if (!img->addr)
-		return (free(img->img), free(img), NULL);
+		return (mlx_destroy_image(dis->mlx, dis->img->img), free(img), NULL);
 	dis->img = img;
 	return (img);
 }
 
 void 	free_display(t_display *dis)
 {
-	mlx_destroy_image(dis->mlx, dis->img->img);
+	if (dis->img->img)
+		mlx_destroy_image(dis->mlx, dis->img->img);
 	mlx_destroy_window(dis->mlx, dis->window);
+	mlx_destroy_display(dis->mlx);
+	free(dis->img);
 	free(dis->mlx);
-	if (dis->img)
-		free(dis->img);
 	free(dis);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:41:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/30 10:23:27 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/03 20:05:08 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_gridinfo	*fill_grid(int fd, t_gridinfo *grid)
 		if (!heights)
 			return (close(fd), free_grid(grid, y), NULL);
 		c_line = fill_coord(heights, y, grid);
-		free(heights);
+		free_split(heights);
 		if (!c_line)
 			return (close(fd), free_grid(grid, y), NULL);
 		grid->grid[y] = c_line;
