@@ -6,23 +6,24 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:53:57 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/30 09:28:03 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:37:35 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 
-double	draw_grid(t_display *dis, t_gridinfo *grid)
+void	draw_grid(t_display *dis, t_gridinfo *grid)
 {
 	int		i;
 	int		j;
-	t_coord start;
+	t_coord	start;
 	t_coord	end;
+
 	j = 0;
 	while (j < grid->y_max - 1)
 	{
 		i = 0;
-		while(i < grid->x_max - 1)
+		while (i < grid->x_max - 1)
 		{
 			start = grid->grid[j][i];
 			end = grid->grid[j + 1][i];

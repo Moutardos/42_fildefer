@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:41 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/02 04:37:27 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:38:03 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ typedef struct s_display
 /* Initiate t_display with everything linked to the current display*/
 /* Return NULL if anything failed                                  */
 t_display	*init_graph(char *title, t_gridinfo * grid);
-double	draw_line(t_display *display, t_coord start, t_coord end);
-double	draw_grid(t_display *dis, t_gridinfo *grid);
+double		draw_line(t_display *display, t_coord start, t_coord end);
+void		draw_grid(t_display *dis, t_gridinfo *grid);
 // t_coord	size_of_grid(t_grid *grid, t_display *dis);
-void	pixel_put_img(t_img_data *img, int x, int y, int color);
-int	h_color(float delta, int c1, int c2);
+void		pixel_put_img(t_img_data *img, int x, int y, int color);
+int			h_color(float delta, int c1, int c2);
 t_img_data	*new_image(t_display *dis);
-void	free_display(t_display *dis);
+void		free_display(t_display *dis);
 #endif

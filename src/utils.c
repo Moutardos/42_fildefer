@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:46:18 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/03 20:05:59 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/11 18:30:31 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	*strtoi(const char *str, int *x_max)
 	return (free(to_atoi), res);
 }
 
+/*
 void	print_grid(t_gridinfo *grid)
 {
 	int	i;
@@ -51,7 +52,8 @@ void	print_grid(t_gridinfo *grid)
 	{
 		while (i < grid->x_max)
 		{
-			ft_printf("(%.3f,%.3f,%.3f)  ", grid->grid[j][i].x, grid->grid[j][i].y, grid->grid[j][i].z);
+			ft_printf("(%.3f,%.3f,%.3f)  ", 
+			grid->grid[j][i].x, grid->grid[j][i].y, grid->grid[j][i].z);
 			i++;
 		}
 		j++;
@@ -60,11 +62,11 @@ void	print_grid(t_gridinfo *grid)
 	}
 	ft_printf("\n}\n");
 }
-
+*/
 int	get_max(int *arr, int len)
 {
 	int	i;
-	int max;
+	int	max;
 
 	max = INT_MIN;
 	i = 0;

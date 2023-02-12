@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:41:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/03 20:05:08 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:38:30 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_gridinfo	*create_grid(char *fname)
 {
 	t_gridinfo	*grid;
 	int			fd;
-	char		*line;
 
 	grid = malloc(sizeof(t_gridinfo));
 	if (!grid)
@@ -33,13 +32,11 @@ t_gridinfo	*create_grid(char *fname)
 	if (!grid->grid)
 		return (free(grid), NULL);
 	grid->x_max = -1;
-	grid->z_max = -1;
+	grid->z_max = 1;
 	grid = fill_grid(fd, grid);
 	if (!grid)
 		return (NULL);
-	if (grid->z_max == 0)
-		grid->z_max = 1;
-	scale_g(grid, create_coord(1, 1, (1.0/((float)grid->z_max))));
+	scale_g(grid, create_coord(1, 1, (1.0 / ((float)grid->z_max))));
 	return (grid);
 }
 
@@ -69,35 +66,32 @@ t_gridinfo	*fill_grid(int fd, t_gridinfo *grid)
 		y++;
 	}
 	line = get_next_line(fd);
-	close(fd);
-	return (grid);
+	return (close(fd), grid);
 }
 
 t_coord	*fill_coord(char **line, int y, t_gridinfo *grid)
 {
 	int		x;
-	int		len;
 	t_coord	*points;
 
-	len = 0;
+	x = 0;
 	if (grid->x_max == -1)
 	{
-		while (line[len])
-			len++;
-		grid->x_max = len;
+		while (line[x])
+			x++;
+		grid->x_max = x;
 	}
-	len = grid->x_max;
 	x = 0;
 	points = malloc(sizeof(t_coord) * grid->x_max);
 	if (!points)
 		return (NULL);
-	while(line[x])
+	while (line[x])
 	{
 		if (ft_atoi(line[x]) > grid->z_max)
 			grid->z_max = ft_atoi(line[x]);
-		points[x].z = (float) -ft_atoi(line[x]); ;
-		points[x].x = ((float) x)/(len - 1);
-		points[x].y = ((float) y)/(grid->y_max - 1);
+		points[x].z = (float) -ft_atoi(line[x]);
+		points[x].x = ((float) x) / (grid->x_max - 1);
+		points[x].y = ((float) y) / (grid->y_max - 1);
 		x++;
 	}
 	return (points);
@@ -126,14 +120,12 @@ t_gridinfo	*gridcpy(t_gridinfo *grid)
 			return (free_grid(cpy, y), NULL);
 		x = 0;
 		while (x < grid->x_max)
-		{
-			cpy->grid[y][x] = grid->grid[y][x];
-			x++;
-		}
+			cpy->grid[y][x] = grid->grid[y][x++];
 		y++;
 	}
 	return (cpy);
 }
+
 void	free_grid(t_gridinfo *grid, int y)
 {
 	int	i;

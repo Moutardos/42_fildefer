@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:07:21 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/30 15:56:38 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:42:14 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	scale_g(t_gridinfo *grid, t_coord scale)
 {
-	int j;
-	int i;
-	t_coord *point;
+	int		j;
+	int		i;
+	t_coord	*point;
 
 	j = 0;
 	while (j < grid->y_max)
 	{
 		i = 0;
 		while (i < grid->x_max)
-	   {
+		{
 			point = &grid->grid[j][i];
 			point->x *= scale.x;
 			point->y *= scale.y;
@@ -34,19 +34,18 @@ void	scale_g(t_gridinfo *grid, t_coord scale)
 	}
 }
 
-
 void	translate_g(t_gridinfo *grid, t_coord coord)
 {
-	int j;
-	int i;
-	t_coord *point;
+	int		j;
+	int		i;
+	t_coord	*point;
 
 	j = 0;
 	while (j < grid->y_max)
 	{
 		i = 0;
 		while (i < grid->x_max)
-	   {
+		{
 			point = &grid->grid[j][i];
 			point->x += coord.x;
 			point->y += coord.y;
@@ -55,23 +54,21 @@ void	translate_g(t_gridinfo *grid, t_coord coord)
 		}
 		j++;
 	}
-
 }
 
 void	project_g(t_gridinfo *grid, t_matrice mat)
 {
-	int 	j;
-	int 	i;
+	int		j;
+	int		i;
 	float	z;
-	
-	t_coord *point;
+	t_coord	*point;
 
 	j = 0;
 	while (j < grid->y_max)
 	{
 		i = 0;
 		while (i < grid->x_max)
-	   {
+		{
 			point = &grid->grid[j][i];
 			z = point->z;
 			*point = mul_matcoord(*point, mat);
@@ -84,12 +81,11 @@ void	project_g(t_gridinfo *grid, t_matrice mat)
 
 void	rotate_3d(t_gridinfo *grid, float x, float y, float z)
 {
-	int j;
-	int i;
-	t_coord *point;
-	const t_matrice mat_x = {{1, 0, 0},{0, cos(x), -sin(x)},{0, sin(x), cos(x)}};
-	const t_matrice mat_y = {{cos(y), 0, sin(y)},{0, 1, 0},{-sin(y), 0, cos(y)}};
-	const t_matrice mat_z = {{cos(z), -sin(z), 0},{sin(z), cos(z), 0},{0, 0, 1}};
+	int				j;
+	int				i;
+	const t_matrice	mx = {{1, 0, 0}, {0, cos(x), -sin(x)}, {0, sin(x), cos(x)}};
+	const t_matrice	my = {{cos(y), 0, sin(y)}, {0, 1, 0}, {-sin(y), 0, cos(y)}};
+	const t_matrice	mz = {{cos(z), -sin(z), 0}, {sin(z), cos(z), 0}, {0, 0, 1}};
 
 	j = 0;
 	translate_g(grid, create_coord(-0.5, -0.5, 0));
@@ -97,11 +93,10 @@ void	rotate_3d(t_gridinfo *grid, float x, float y, float z)
 	{
 		i = 0;
 		while (i < grid->x_max)
-	   {
-			point = &grid->grid[j][i];
-			*point = mul_matcoord(*point, mat_y);
-			*point = mul_matcoord(*point, mat_x);
-			*point = mul_matcoord(*point, mat_z);
+		{
+			grid->grid[j][i] = mul_matcoord(grid->grid[j][i], my);
+			grid->grid[j][i] = mul_matcoord(grid->grid[j][i], mx);
+			grid->grid[j][i] = mul_matcoord(grid->grid[j][i], mz);
 			i++;
 		}
 		j++;

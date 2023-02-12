@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:27:56 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/01/29 16:30:15 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/12 16:39:40 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void	rotate_3d(t_gridinfo *grid, float x, float y, float z);
 int		*strtoi(const char *str, int *len);
 void	print_grid(t_gridinfo *grid);
 int	get_max(int *arr, int len);
+void	free_split(char **s);
 
 #endif
