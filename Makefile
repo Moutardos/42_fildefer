@@ -5,12 +5,9 @@ BDIR = bin
 IDIR = include
 LIBFT = $(IDIR)/libft
 LIBMLX = $(IDIR)/mlx
-LIBMLX_MAC = $(IDIR)/mlx_mac
 RM = rm -f
-CFLAGS = -Wall -Wextra -I$(IDIR)
+CFLAGS = -Wall -Wextra -I$(IDIR) -g 
 LFLAGS = -L$(LIBFT) -lft -L$(LIBMLX)   -lmlx -lXext -lX11 -lm
-LFLAGS_MAC = -L$(LIBFT) -lft -L$(LIBMLX) -lmlx  -framework -OpenGL -framework AppKit -o $(NAME)
-
 _DEPS = event.h display.h grid.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 _OBJS =  main.o display.o grid.o utils.o display_utils.o event.o keys.o matrice.o transform.o
@@ -43,4 +40,5 @@ re: fclean all
 
 .PHONY: all clean fclean re lib
 
-
+malloc_test: lib $(OBJS)
+	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJS} $(LFLAGS) -L. -lmallocator 

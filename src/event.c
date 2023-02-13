@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:47:05 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/13 13:48:46 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:24:45 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	render_img(t_env *env)
 	dis = env->dis;
 	dis->img = new_image(env->dis);
 	if (!dis->img)
-		return (free(user), -1);
+		return (quit_fdf(env), -1);
 	grid = gridcpy(env->grid);
 	if (!grid)
-		return (free(user), free(dis->img), -1);
+		return (quit_fdf(env), -1);
 	scale_g(grid, create_coord(1, 1, user->zoom.z));
 	rotate_3d(grid, user->angle.x, user->angle.y, user->angle.z);
 	scale_g(grid, create_coord(user->zoom.x, user->zoom.y, 1));
@@ -91,7 +91,7 @@ int	quit_fdf(t_env *env)
 int	fdf_loop(t_env *env)
 {
 	mlx_hook(env->dis->window, 17, 0, quit_fdf, env);
-	mlx_key_hook(env->dis->window, key_handler, env);
+	mlx_hook(env->dis->window, 2, (1L << 0), key_handler, env);
 	mlx_loop_hook(env->dis->mlx, render_img, env);
 	mlx_loop(env->dis->mlx);
 	return (0);
