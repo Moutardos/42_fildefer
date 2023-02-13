@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 06:59:27 by lcozdenm          #+#    #+#             */
-/*   Updated: 2022/12/13 07:32:31 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/30 14:58:53 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_line	*fill_lines(t_fd *fdinfo, ssize_t *nsize)
 	if (!res)
 		return (NULL);
 	curr = res;
-	while (curr->size && ft_strchr(curr->buf, '\n') == -1)
+	while (curr->size && ft_strchr2(curr->buf, '\n') == -1)
 	{
 		curr->next = get_line(fdinfo);
 		if (!curr->next)
@@ -57,8 +57,8 @@ t_line	*fill_lines(t_fd *fdinfo, ssize_t *nsize)
 		*nsize += curr->size;
 		curr = curr->next;
 	}
-	if (ft_strchr(curr->buf, '\n') != -1)
-		curr->size = ft_strchr(curr->buf, '\n') + 1;
+	if (ft_strchr2(curr->buf, '\n') != -1)
+		curr->size = ft_strchr2(curr->buf, '\n') + 1;
 	*nsize += curr->size;
 	fill_reste(fdinfo, curr);
 	return (res);

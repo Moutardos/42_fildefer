@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:41:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/12 16:38:30 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:03:54 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_gridinfo	*fill_grid(int fd, t_gridinfo *grid)
 	int		y;
 	char	*line;
 	char	**heights;
-	int		i;
 	t_coord	*c_line;
 
 	y = 0;
@@ -118,9 +117,9 @@ t_gridinfo	*gridcpy(t_gridinfo *grid)
 		cpy->grid[y] = malloc(sizeof(t_coord) * grid->x_max);
 		if (!cpy->grid[y])
 			return (free_grid(cpy, y), NULL);
-		x = 0;
-		while (x < grid->x_max)
-			cpy->grid[y][x] = grid->grid[y][x++];
+		x = -1;
+		while (++x < grid->x_max)
+			cpy->grid[y][x] = grid->grid[y][x];
 		y++;
 	}
 	return (cpy);

@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 06:59:19 by lcozdenm          #+#    #+#             */
-/*   Updated: 2022/12/20 17:52:17 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/30 14:58:10 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	free_fd(int fd, t_ffd **fd_infos);
 /* Free line struct*/
 void	free_line(t_line **line);
 
-/* Return index of where character c is found, -1 if absent*/
-ssize_t	ft_strchr(const char *s, int c);
+/* Return index ft_strchrof where character c is found, -1 if absent*/
+ssize_t	ft_strchr2(const char *s, int c);
 
 /* Fills the character found after a newline in the line buffer,
    is printed first when get_next_line is called*/

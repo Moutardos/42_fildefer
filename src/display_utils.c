@@ -6,13 +6,13 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 12:42:49 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/12 16:44:37 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:05:41 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 
-t_display	*init_graph(char *title, t_gridinfo *grid)
+t_display	*init_graph(char *title)
 {
 	t_display	*n;
 

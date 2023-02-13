@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 07:50:33 by lcozdenm          #+#    #+#             */
-/*   Updated: 2022/12/12 23:49:33 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/30 15:04:17 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	free_line(t_line **line)
 	*line = NULL;
 }
 
-ssize_t	ft_strchr(const char *s, int c)
+ssize_t	ft_strchr2(const char *s, int c)
 {
 	size_t	i;
 
@@ -105,7 +105,7 @@ void	fill_reste(t_fd *fdinfo, t_line *line)
 	size_t	i;
 
 	i = 0;
-	offset = ft_strchr(line->buf, '\n');
+	offset = ft_strchr2(line->buf, '\n');
 	if (offset == -1)
 		while (fdinfo->reste[i] != '\0')
 			fdinfo->reste[i++] = '\0';

@@ -7,7 +7,7 @@ LIBFT = $(IDIR)/libft
 LIBMLX = $(IDIR)/mlx
 LIBMLX_MAC = $(IDIR)/mlx_mac
 RM = rm -f
-CFLAGS = -Wall -Wextra -I$(IDIR) $(LIBMLX)/libmlx.a 
+CFLAGS = -Wall -Wextra -I$(IDIR)
 LFLAGS = -L$(LIBFT) -lft -L$(LIBMLX)   -lmlx -lXext -lX11 -lm
 LFLAGS_MAC = -L$(LIBFT) -lft -L$(LIBMLX) -lmlx  -framework -OpenGL -framework AppKit -o $(NAME)
 
@@ -19,7 +19,7 @@ OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 all: lib $(NAME)
 
 $(ODIR)/%.o : src/%.c 
-	$(CC) $(CFLAGS)  -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 lib:
 	mkdir -p $(ODIR)

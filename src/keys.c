@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 18:49:00 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/12 16:41:39 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:51:34 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ static int	key_handler2(int key, t_env *env)
 		user->move.x += user->zoom.y / 10;
 	else if (key == 65362)
 		user->move.y += user->zoom.x / 10;
-	else if (key == 45)
+	else if (key == 61)
 	{
 		if (user->zoom.z < 10)
 			user->zoom.z *= 1.25;
 	}
-	else if (key == 61)
+	else if (key == 45)
 		user->zoom.z /= 1.25;
 	else if (key == 65307)
 	{

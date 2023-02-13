@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:46:18 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/11 18:30:31 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:10:50 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ int	*strtoi(const char *str, int *x_max)
 		i++;
 	}
 	i = 0;
-	while (res && i < len)
-		free(to_atoi[i++]);
 	*x_max = len;
-	return (free(to_atoi), res);
+	return (free_split(to_atoi), res);
 }
 
 /*

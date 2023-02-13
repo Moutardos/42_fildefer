@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:07:21 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/12 16:42:14 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:08:02 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	translate_g(t_gridinfo *grid, t_coord coord)
 	}
 }
 
-void	project_g(t_gridinfo *grid, t_matrice mat)
+void	project_g(t_gridinfo *grid, const t_matrice mat)
 {
 	int		j;
 	int		i;

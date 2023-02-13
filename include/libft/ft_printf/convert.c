@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcozdenm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 19:26:07 by lcozdenm          #+#    #+#             */
-/*   Updated: 2022/12/03 19:27:19 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/01/30 14:47:06 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "args.h"
-#include "stdio.h"
+#include <stdio.h>
 
 t_atype	ft_get_atype(char c)
 {

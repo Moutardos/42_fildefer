@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:47:05 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/12 15:41:22 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:48:46 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	render_img(t_env *env)
 {
 	t_gridinfo		*grid;
 	t_display		*dis;
-	t_matrice const	proj = MAT_PROJ;
+	t_matrice const	proj = {{1, 0, 0}, {0, 1, 0}, {0, 0, 0}};
 	t_modif			*user;
 
 	user = env->user;
@@ -47,7 +47,7 @@ t_modif	*init_user(void)
 		return (NULL);
 	new->angle = create_coord(A_ISO_X, A_ISO_Y, A_ISO_Z);
 	new->move = create_coord(X, Y, 0);
-	new->zoom = create_coord(W, H, 0.25);
+	new->zoom = create_coord(W, H, 0.50);
 	return (new);
 }
 
@@ -63,7 +63,7 @@ t_env	*init_env(char *name)
 	if (!env->grid)
 		return (free(env), NULL);
 	grid = env->grid;
-	env->dis = init_graph(name, grid);
+	env->dis = init_graph(name);
 	if (!env->dis)
 	{
 		free_grid(grid, grid->y_max);
@@ -78,17 +78,19 @@ t_env	*init_env(char *name)
 	return (env);
 }
 
-void	quit_fdf(t_env *env)
+int	quit_fdf(t_env *env)
 {
 	free_display(env->dis);
 	free_grid(env->grid, env->grid->y_max);
 	free(env->user);
 	free(env);
 	exit(0);
+	return (0);
 }
 
 int	fdf_loop(t_env *env)
 {
+	mlx_hook(env->dis->window, 17, 0, quit_fdf, env);
 	mlx_key_hook(env->dis->window, key_handler, env);
 	mlx_loop_hook(env->dis->mlx, render_img, env);
 	mlx_loop(env->dis->mlx);
