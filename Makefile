@@ -8,7 +8,7 @@ LIBMLX = $(IDIR)/mlx/libmlx.a
 LIB = $(LIBFT)/libft.a
 
 RM = rm -f
-CFLAGS = -Wall -Wextra -I$(IDIR) -g 
+CFLAGS = -Wall -Wextra -Werror -I$(IDIR) -g 
 LFLAGS = -L$(IDIR)/libft -lft -L$(IDIR)/mlx -lmlx -lXext -lX11 -lm
 _DEPS = event.h display.h grid.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
@@ -46,4 +46,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re lib
+.PHONY: all clean fclean re
