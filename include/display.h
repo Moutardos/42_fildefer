@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:41 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/13 13:08:00 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/17 09:53:22 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,30 @@ typedef struct s_display
 	int			c2;
 }	t_display;
 
-/* Initiate t_display with everything linked to the current display*/
-/* Return NULL if anything failed                                  */
+/* 
+*  Initiate t_display with everything linked to the current display
+*  Return NULL if anything failed
+*/
 t_display	*init_graph(char *title);
+
+/* 
+*  Draw a line from start to end in the img given by display 
+*  Return the number of pixels drawn
+*/
 double		draw_line(t_display *display, t_coord start, t_coord end);
+
+/* Draw the grid in the img given by display */
 void		draw_grid(t_display *dis, t_gridinfo *grid);
-// t_coord	size_of_grid(t_grid *grid, t_display *dis);
+
+/* Put a pixel of a given color in the image */
 void		pixel_put_img(t_img_data *img, int x, int y, int color);
+
+/* Return the color depending on the delta from c1 to c2 */
 int			h_color(float delta, int c1, int c2);
+
+/* Allocate and return a new image */
 t_img_data	*new_image(t_display *dis);
+
+/* Free the different ressources in display */
 void		free_display(t_display *dis);
 #endif

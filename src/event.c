@@ -6,7 +6,7 @@
 /*   By: lcozdenm <lcozdenm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:47:05 by lcozdenm          #+#    #+#             */
-/*   Updated: 2023/02/13 17:24:45 by lcozdenm         ###   ########.fr       */
+/*   Updated: 2023/02/17 09:57:58 by lcozdenm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int	quit_fdf(t_env *env)
 
 int	fdf_loop(t_env *env)
 {
-	mlx_hook(env->dis->window, 17, 0, quit_fdf, env);
-	mlx_hook(env->dis->window, 2, (1L << 0), key_handler, env);
+	mlx_hook(env->dis->window, EXIT_BUTTON, 0, quit_fdf, env);
+	mlx_hook(env->dis->window, KEY_PRESS, KEY_PRESS_MASK, key_handler, env);
 	mlx_loop_hook(env->dis->mlx, render_img, env);
 	mlx_loop(env->dis->mlx);
 	return (0);
