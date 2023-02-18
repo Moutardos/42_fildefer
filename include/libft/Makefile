@@ -22,12 +22,12 @@ CFLAGS = -Wall -Wextra -Werror -o
 all: $(NAME)
 
 $(ODIR):
-	@ mkdir -p $(ODIR)
-	@ mkdir -p $(ODIR)/ft_printf
-	@ mkdir -p $(ODIR)/gnl
+	mkdir -p $(ODIR)
+	mkdir -p $(ODIR)/ft_printf
+	mkdir -p $(ODIR)/gnl
 
 $(ODIR)/%.o : %.c | $(ODIR)
-	@ $(CC) $(CFLAGS)  $@ -c $<
+	$(CC) $(CFLAGS)  $@ -c $<
 
 $(NAME) : $(OBJS)
 	$(AR) $(LIBFLAGS) $(NAME) $(OBJS)
